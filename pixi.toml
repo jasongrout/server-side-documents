@@ -5,35 +5,30 @@ platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
 [dependencies]
 python = "3.13.*"
-nodejs = "22.*"
 sphinx = ">=9.2.0,<10"
 myst-parser = ">=5.2.0,<6"
 sphinxcontrib-openapi = ">=0.10.0,<0.11"
 pyyaml = ">=6.0.3,<7"
 
-[activation.env]
+[tasks.docs]
+description = "Build the documentation site: pixi run docs [outdir]"
+args = [{ arg = "outdir", default = "docs/_build/html" }]
+cmd = "sphinx-build -W --keep-going -b html docs {{ outdir }}"
+
+# Node.js is only needed for linting, so keep it out of the default
+# environment that the docs build installs.
+[feature.lint.dependencies]
+nodejs = "22.*"
+
+[feature.lint.activation.env]
 REDOCLY_CLI_VERSION = "2.72.1"
 REDOCLY_TELEMETRY = "off"
 REDOCLY_SUPPRESS_NOTIFICATIONS = "true"
 
-[tasks.lint]
-description = "Lint the OpenAPI spec"
-cmd = "npx --yes @redocly/cli@$REDOCLY_CLI_VERSION lint ssd-execute-openapi.yaml"
+[feature.lint.tasks.lint]
+description = "Lint the OpenAPI spec with Redocly"
+args = [{ arg = "format", default = "stylish" }]
+cmd = "npx --yes @redocly/cli@$REDOCLY_CLI_VERSION lint ssd-execute-openapi.yaml --format={{ format }}"
 
-[tasks.docs-sphinx]
-description = "Build the Sphinx site"
-args = [{ arg = "outdir", default = "docs/_build/html" }]
-cmd = "sphinx-build -b html docs {{ outdir }}"
-
-[tasks.docs-redoc]
-description = "Build the standalone Redoc page linked from the Sphinx site"
-args = [{ arg = "outdir", default = "docs/_build/html" }]
-cmd = "npx --yes @redocly/cli@$REDOCLY_CLI_VERSION build-docs ssd-execute-openapi.yaml -o {{ outdir }}/execute-api.html"
-
-[tasks.docs]
-description = "Build the full documentation site: pixi run docs [outdir]"
-args = [{ arg = "outdir", default = "docs/_build/html" }]
-depends-on = [
-  { task = "docs-sphinx", args = ["{{ outdir }}"] },
-  { task = "docs-redoc", args = ["{{ outdir }}"] },
-]
+[environments]
+lint = { features = ["lint"], no-default-feature = true }

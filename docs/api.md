@@ -1,7 +1,5 @@
 # API
 
-See [api](execute-api.html){.external}
-
 {{ api_description }}
 
 ```{eval-rst}
