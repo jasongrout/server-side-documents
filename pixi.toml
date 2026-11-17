@@ -29,7 +29,7 @@ REDOCLY_SUPPRESS_NOTIFICATIONS = "true"
 [feature.lint.tasks.lint]
 description = "Lint the OpenAPI spec with Redocly"
 args = [{ arg = "format", default = "stylish" }]
-cmd = "npx --yes @redocly/cli@$REDOCLY_CLI_VERSION lint ssd-execute-openapi.yaml --format={{ format }}"
+cmd = "npx --yes @redocly/cli@$REDOCLY_CLI_VERSION lint --format={{ format }}"
 
 [environments]
 lint = { features = ["lint"], no-default-feature = true }
