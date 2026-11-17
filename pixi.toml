@@ -21,7 +21,7 @@ cmd = "sphinx-build -W --keep-going -b html docs {{ outdir }}"
 nodejs = "22.*"
 
 [feature.lint.activation.env]
-REDOCLY_CLI_VERSION = "2.72.1"
+REDOCLY_CLI_VERSION = "2.79.0"
 REDOCLY_TELEMETRY = "off"
 REDOCLY_SUPPRESS_NOTIFICATIONS = "true"
 
