@@ -1,0 +1,10 @@
+# Redocly CLI configuration, used by `pixi run lint`.
+# See https://redocly.com/docs/cli/configuration
+
+extends:
+  - recommended
+
+rules:
+  # Every operation must have tags, and each must be declared in the
+  # top-level `tags` list.
+  operation-tag-defined: error

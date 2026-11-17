@@ -24,6 +24,7 @@ paths:
     post:
       summary: Enqueue notebook cells for server-side execution
       operationId: executeCells
+      tags: [executions]
       parameters:
         - name: kernel_id
           in: path
