@@ -1,6 +1,6 @@
 # API
 
-See [api](../execute-api.html){.external}
+See [api](execute-api.html){.external}
 
 {{ api_description }}
 
