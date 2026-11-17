@@ -9,6 +9,7 @@ sphinx = ">=9.2.0,<10"
 myst-parser = ">=5.2.0,<6"
 sphinxcontrib-openapi = ">=0.10.0,<0.11"
 pyyaml = ">=6.0.3,<7"
+pydata-sphinx-theme = ">=0.24.0,<0.25"
 
 [tasks.docs]
 description = "Build the documentation site: pixi run docs [outdir]"
